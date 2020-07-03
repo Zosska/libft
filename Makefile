@@ -9,31 +9,27 @@
 #    Updated: 2020/07/03 21:03:03 by agazquez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+NAME = libft.a
 
-NAME: libft.a
+SRC = ft_memset.c ft_bzero.c ft_isalpha.c ft_memccpy.c \
+	ft_memcpy.c \
 
-CC = gcc;
+OBJ = $(subst .c,.o,$(SRC))
 
-CFLAGS = -Wall -Wextra -Werror -I. -c
+CFLAGS = -Wall -Werror -Wextra
 
-SRC =	ft_memset.c
-		ft_bzero.c
-		ft_memcpy.c
-		ft_memccpy.c
+all: $(NAME)
 
-OBJ = $(SRC:.c=.o)
-
-all: &(NAME)
-
-$(NAME): $(OBJ)
-		ar rc $(NAME) $(OBJ)
-		ranlib $(NAME)
+$(NAME):
+	gcc $(CFLAGS) -c $(SRC)
+	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 
 clean:
-		rm -f $(OBJ)
+	/bin/rm -f $(OBJ)
 
 fclean: clean
-		rm -f $(NAME)
+	/bin/rm -f $(NAME)
 
 re: fclean all
 
